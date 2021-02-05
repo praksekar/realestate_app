@@ -1,17 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import "./styles/index.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import PrivateRoute from "./components/PrivateRoute";
+import PublicRoute from "./components/PublicRoute";
+import Login from "./pages/Login"
+import Signup from "./pages/Signup"
+import Home from "./pages/Home"
+import Testpage from "./pages/Testpage"
+import { AuthProvider } from "./contexts/AuthContext";
+import UserDataProvider from './contexts/UserDataContext';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+const routing = (
+  <Router>
+    <Switch>
+      <AuthProvider>
+        <UserDataProvider>
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/home" component={Home} />
+          <Route path="/testpage" component={Testpage} />
+        </UserDataProvider>
+      </AuthProvider>
+    </Switch>
+  </Router>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+ReactDOM.render(routing, document.getElementById("root"));
+
 reportWebVitals();
