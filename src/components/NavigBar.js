@@ -2,16 +2,17 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import LogoutButton from './LogoutButton'
 import { Navbar } from "react-bootstrap"
-import { useAuth } from "../contexts/AuthContext"
+import { useUserData } from "../contexts/UserDataContext"
 
 
 function NavigBar() {
 
-    const { currentUser } = useAuth()
+    const { authUser } = useUserData()
+    console.log("authUser", authUser)
     return (
         <Navbar bg="dark">
             <LogoutButton />
-            <h1 style={{ color: "red" }}>Welcome, {currentUser && currentUser.email}</h1>
+            <h1 style={{ color: "red" }}>Welcome, {authUser && authUser.uid}</h1>
         </Navbar>
     )
 }

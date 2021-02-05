@@ -1,12 +1,12 @@
 import React, { useState } from "react"
 import { useHistory } from 'react-router-dom'
-import { useAuth } from '../contexts/AuthContext'
 import { Button } from "react-bootstrap";
+import { useUserData } from "../contexts/UserDataContext"
 
 export default function LogoutButton() {
 
     const history = useHistory()
-    const { logout } = useAuth()
+    const { logout } = useUserData()
     const [error, setError] = useState("")
 
     async function handleLogout() {

@@ -10,20 +10,17 @@ import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import Home from "./pages/Home"
 import Testpage from "./pages/Testpage"
-import { AuthProvider } from "./contexts/AuthContext";
 import UserDataProvider from './contexts/UserDataContext';
 
 const routing = (
   <Router>
     <Switch>
-      <AuthProvider>
-        <UserDataProvider>
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/home" component={Home} />
-          <Route path="/testpage" component={Testpage} />
-        </UserDataProvider>
-      </AuthProvider>
+      <UserDataProvider>
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/home" component={Home} />
+        <Route path="/testpage" component={Testpage} />
+      </UserDataProvider>
     </Switch>
   </Router>
 );

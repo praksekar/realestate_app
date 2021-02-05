@@ -1,14 +1,12 @@
 import { React, useState } from "react";
 import { useForm } from "../hooks/useForm";
-import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import { Form, Button, Container, Row, Col, Card, Alert } from "react-bootstrap";
 import { useUserData } from "../contexts/UserDataContext"
 
 export default function Signup() {
     const [formValues, handleChange] = useForm({ username: "", password: "", confirmPassword: "" });
-    const { signup } = useAuth();
-    const { createNewDatabaseUser } = useUserData();
+    const { signup, createNewDbUser } = useUserData();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const history = useHistory();
@@ -21,9 +19,8 @@ export default function Signup() {
         try {
             setError("")
             setLoading(true)
-            await signup(formValues.username, formValues.password)
+            await signup(formValues.username, formValues.password, { email: formValues.username, userPermission: "user" })
             history.push("/home")
-            await createNewDatabaseUser({ email: formValues.username, userPermission: "user" })
         } catch {
             setError('Failed to create an account')
         }

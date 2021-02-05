@@ -1,15 +1,13 @@
 import { React, useState } from "react";
 import { useForm } from "../hooks/useForm";
-import { useAuth } from "../contexts/AuthContext";
+import { useUserData } from "../contexts/UserDataContext";
 import { Link, useHistory } from "react-router-dom";
-import { useUserData } from "../contexts/UserDataContext"
 
 import { Form, Button, Container, Row, Col, Card, Alert } from "react-bootstrap";
 
 export default function Login() {
+  const { login, getUserDbData } = useUserData()
   const [formValues, handleChange] = useForm({ username: "", password: "" });
-  const { getUserData } = useUserData()
-  const { login } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -21,7 +19,6 @@ export default function Login() {
       setLoading(true)
       await login(formValues.username, formValues.password)
       console.log("boba")
-      await getUserData()
       console.log("boba2")
       history.push("/home")
     } catch {
