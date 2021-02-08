@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
-import "./styles/index.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
@@ -16,9 +15,9 @@ const routing = (
   <Router>
     <Switch>
       <UserDataProvider>
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-        <Route path="/home" component={Home} />
+        <PublicRoute path="/login" component={Login} />
+        <PublicRoute path="/signup" component={Signup} />
+        <PrivateRoute path="/home" component={Home} />
         <Route path="/testpage" component={Testpage} />
       </UserDataProvider>
     </Switch>

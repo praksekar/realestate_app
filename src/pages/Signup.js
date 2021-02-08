@@ -57,8 +57,6 @@ export default function Signup() {
                     </Card.Body>
                 </Card>
             </Row>
-            { formValues.username}
-            { formValues.password}
         </Container>
     );
 }

@@ -27,12 +27,11 @@ export default function UserDataProvider({ children }) {
     }
 
     function login(email, password) {
-        return auth.signInWithEmailAndPassword(email, password).then((cred) => {
-            return db.collection("users").doc(cred.user.uid).get().then(doc => {
-                setDbUserData(doc.data())
-            })
-        })
+        return auth.signInWithEmailAndPassword(email, password)
+            .then((cred) => db.collection("users").doc(cred.user.uid).get())
+            .then(doc => setDbUserData(doc.data()))
     }
+
 
     function logout() {
         return auth.signOut()
@@ -55,7 +54,6 @@ export default function UserDataProvider({ children }) {
     }
 
     function getUserDbData() {
-        console.log("aslkdf", authUser.uid)
         return db.collection("users").doc(authUser.uid).get().then(doc => {
             console.log("dataasdfasfd", doc.data())
             setDbUserData(doc.data())
